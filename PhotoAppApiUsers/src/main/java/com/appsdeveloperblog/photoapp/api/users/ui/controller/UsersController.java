@@ -4,6 +4,7 @@ import com.appsdeveloperblog.photoapp.api.users.service.UsersService;
 import com.appsdeveloperblog.photoapp.api.users.shared.UserDto;
 import com.appsdeveloperblog.photoapp.api.users.ui.model.CreateUserRequestModel;
 import com.appsdeveloperblog.photoapp.api.users.ui.model.CreateUserResponseModel;
+import com.appsdeveloperblog.photoapp.api.users.ui.model.UserResponseModel;
 import javax.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
@@ -13,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +32,7 @@ public class UsersController {
 
   @GetMapping("/status/check")
   public String status() {
-    return "working on port " + env.getProperty("local.server.port");
+    return "working on port " + env.getProperty("local.server.port") + ", with token =" + env.getProperty("token.secret");
   }
 
   @PostMapping(consumes = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE},
@@ -42,5 +44,13 @@ public class UsersController {
     UserDto createdUser = usersService.createUser(userDto);
     CreateUserRequestModel returnValue = modelMapper.map(createdUser, CreateUserRequestModel.class);
     return new ResponseEntity(returnValue, HttpStatus.CREATED);
+  }
+
+  @GetMapping(value="/{userId}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+  public ResponseEntity<UserResponseModel> getUser(@PathVariable("userId") String userId) {
+
+    UserDto userDto = usersService.getUserByUserId(userId);
+    UserResponseModel returnValue = new ModelMapper().map(userDto, UserResponseModel.class);
+    return ResponseEntity.status(HttpStatus.OK).body(returnValue);
   }
 }
