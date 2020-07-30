@@ -32,3 +32,13 @@ View层是界面，Model层是业务逻辑，Controller层用来调度View层和
 ------------------------------------------------------------------------------------------------------------------------------------
 8.Spring Cloud
 是一套完整的微服务解决方案，是一系列不同功能的微服务框架的集合。Spring Cloud基于Spring Boot，简化了分布式系统的开发，集成了服务发现、配置管理、消息总线、负载均衡、断路器、数据监控等各种服务治理能力。比如sleuth提供了全链路追踪能力，Netflix套件提供了hystrix熔断器、zuul网关等众多的治理组件。config组件提供了动态配置能力，bus组件支持使用RabbitMQ、kafka、Activemq等消息队列，实现分布式服务之间的事件通信。
+
+@Component注解在类上使用表明这个类是个组件类，需要Spring为这个类创建bean。
+@Bean注解使用在方法上，告诉Spring这个方法将会返回一个Bean对象，需要把返回的对象注册到Spring的应用上下文中。
+
+然后要知道在Spring Boot中有两种上下文，一种是bootstrap, 另外一种是application。
+bootstrap是应用程序的父上下文，也就是说bootstrap会先于applicaton加载。bootstrap主要用于从额外的资源来加载配置信息，还可以在本地外部配置文件中解密属性。<b>bootstrap里面的属性会优先加载</b>，默认也<b>不能被本地相同配置覆盖</b>。
+
+starter是springboot提供的无缝集成功能的一种方式，使用某个功能时开发者不需要关注各种依赖库的处理，不需要具体的配置信息，由Spring Boot自动配置进行bean的创建。例如需要使用web功能时，只需要在依赖中引入spring-boot-starter-web即可。
+
+actuator是用来对应用程序进行监视和管理，通过restful api请求来监管、审计、收集应用的运行情况。
