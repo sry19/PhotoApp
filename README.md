@@ -4,4 +4,6 @@
 
 Only the objects of those classes can be serialized which are <b>implementing java.io.Serializable interface</b>.
 
+The Serialization runtime associates a version number with each Serializable class called a <b>SerialVersionUID<b>, which is used during Deserialization to verify that sender and reciever of a serialized object have loaded classes for that object which are <b>compatible<b> with respect to serialization. If the reciever has loaded a class for the object that has different UID than that of corresponding sender’s class, the Deserialization will result in an InvalidClassException. A Serializable class can declare its own UID explicitly by declaring a field name.
+
 If a serializable class doesn’t explicitly declare a serialVersionUID, then the serialization runtime will calculate a default one for that class based on various aspects of class, as described in Java Object Serialization Specification. However it is strongly recommended that all serializable classes explicitly <b>declare serialVersionUID</b> value, since its computation is highly <b>sensitive to class details</b> that may vary depending on compiler implementations, any change in class or using different id may affect the serialized data.
