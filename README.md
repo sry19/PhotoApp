@@ -11,3 +11,9 @@ If a serializable class doesn’t explicitly declare a serialVersionUID, then th
 3. 控制反转（Inversion of Control） 就是依赖倒置原则的一种代码设计的思路。具体采用的方法就是所谓的依赖注入（Dependency Injection）不在上层类里new一个下层类
 控制反转容器(IoC Container)呢？其实上面的例子中，对车类进行初始化的那段代码发生的地方，就是控制反转容器
 https://www.zhihu.com/question/23277575
+------------------------------------------------------------------------------------------------------------------------------------
+4. Spring MVC: MVC要实现的目标是将软件用户界面和业务逻辑分离以使代码可扩展性、可复用性、可维护性、灵活性加强。
+View层是界面，Model层是业务逻辑，Controller层用来调度View层和Model层，将用户界面和业务逻辑合理的组织在一起，起粘合剂的效果。所以Controller中的内容能少则少，这样才能提供最大的灵活性。
+比方说，有一个View会提交数据给Model进行处理以实现具体的行为，View通常不会直接提交数据给Model，它会先把数据提交给Controller，然后Controller再将数据转发给Model。假如此时程序业务逻辑的处理方式有变化，那么只需要在Controller中将原来的Model换成新实现的Model就可以了，控制器的作用就是这么简单， 用来将不同的View和不同的Model组织在一起，顺便替双方传递消息，仅此而已。
+
+<b>MVC 三者中，Model 是核心。</b>
