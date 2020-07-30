@@ -26,3 +26,6 @@ View层是界面，Model层是业务逻辑，Controller层用来调度View层和
 404 Not Found                 //请求资源不存在，eg：输入了错误的URL
 500 Internal Server Error     //服务器发生不可预期的错误
 503 Server Unavailable        //服务器当前不能处理客户端的请求，一段时间后可能恢复正常
+
+6. http(超文本传输协议HyperText Transfer Protocol): 客户端和服务端进行数据传输的一种规则
+7.Java Bean: (1)、所有属性为private (2)、提供默认构造方法 (3)、提供getter和setter (4)、实现serializable接口
